@@ -1,6 +1,6 @@
 # Snake Game
 
-- The game loads once snake.html loads.
+- The game loads once index.html loads.
 - The game board will fill whatever size document it is loaded within-this would allow it to be easily embedded in an iframe.
 - The snake starts at the center, moving right.
 - The game can be paused/played with the spacebar.
