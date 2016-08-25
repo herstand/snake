@@ -7,7 +7,11 @@
 - The snake starts at the center, moving right.
 - The game can be paused/played with the spacebar.
 - As a handicap (for viewability as much as gameplay), the apple has a 5 pixel radius—the snake will eat it if it hits anywhere within this radius.
-- The snake is only one pixel thick. If I had more time I would make the thickness of the snake a user-defined feature, since it's hard to see on a large screen.
+- The snake is one pixel thick.
 - The snake dies when it hits a wall or itself.
 - The game restarts automatically when the snake dies
-- If I had more time I would add a high score (number of apples eaten)
+
+## TODO
+- Add a high score (number of apples eaten)
+- Make the thickness of the snake a user-defined feature
+- Add accelerometer events and/or touch-screen buttons for phones/tablets
