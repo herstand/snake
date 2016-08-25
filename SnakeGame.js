@@ -53,10 +53,10 @@
           "y" : this.body[this.body.length - 1].y,
         }
         if (
-          snakeHead.x > (apple.x - apple.radius) &&
-          snakeHead.x < (apple.x + apple.radius) &&
-          snakeHead.y > (apple.y - apple.radius) &&
-          snakeHead.y < (apple.y + apple.radius)
+          snakeHead.x >= (apple.x - apple.radius) &&
+          snakeHead.x <= (apple.x + apple.radius) &&
+          snakeHead.y >= (apple.y - apple.radius) &&
+          snakeHead.y <= (apple.y + apple.radius)
         ) {
           this.allowedLength += moveDistancePerFrame;
           apple.resetLocation();
