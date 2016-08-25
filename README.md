@@ -1,7 +1,7 @@
 # Snake Game
 
 - The game is hosted at http://www.herstand.com/snake
-- The code is hosted at https://github.com/micahherstand/snake
+- The code is also up at https://github.com/micahherstand/snake
 - The game loads once index.html loads.
 - The game board will fill whatever size document it is loaded within-this would allow it to be easily embedded in an iframe.
 - The snake starts at the center, moving right.
