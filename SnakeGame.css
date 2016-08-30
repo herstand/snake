@@ -1,6 +1,120 @@
+* {
+  box-sizing:border-box;
+}
+html, body, main {
+  margin:0;
+  padding:0;
+}
+body {
+  background:black;
+  padding-bottom:20px;
+}
+.templates {
+  display:none;
+}
+.homepage {
+  font-family: "Monaco", "Courier", "Courier New";
+  color:white;
+  text-align:center;
+  margin:0;
+}
+.homepage h1 {
+  font-size:40px;
+  margin-top:0;
+  padding-top:20px;
+}
+.homepage h2 {
+  font-size:24px;
+  color:grey;
+  text-align:center;
+}
+.homepage .rules, .homepage .controls {
+  margin-left:20px;
+  margin-right:20px;
+  text-align:left;
+  width:320px;
+  display:inline-block;
+  vertical-align:top;
+}
+.homepage .controls aside.arrows {
+  display:inline-block;
+  vertical-align:top;
+  margin-right:50px;
+  padding-top:33px;
+  color:grey;
+}
+.homepage .controls section.arrows {
+  display:inline-block;
+  position:relative;
+  vertical-align:bottom;
+  text-align:center;
+}
+.homepage .controls .arrow {
+  width:40px;
+  height:40px;
+  margin:2px;
+}
+.homepage .controls aside.spacebar {
+  display:inline-block;
+  vertical-align:top;
+  margin-right:30px;
+  padding-top:15px;
+  color:grey;
+}
+.homepage .controls span.spacebar {
+  vertical-align:bottom;
+  border:2px solid grey;
+  border-radius:5px;
+  position:relative;
+  display:inline-block;
+  padding:10px 120px 20px 10px;
+  margin-bottom:15px;
+  font-size:12px;
+}
+.homepage .controls aside.escape {
+  color:grey;
+  display:inline-block;
+  margin-right:80px;
+  vertical-align:top;
+  padding-top:15px;
+}
+.homepage .controls span.escape {
+  vertical-align:bottom;
+  border:2px solid grey;
+  border-radius:5px;
+  position:relative;
+  display:inline-block;
+  padding:11px 10px;
+  font-size:16px;
+  margin-bottom:15px;
+}
+.homepage .start {
+  background:black;
+  color:white;
+  padding:10px 20px;
+  font-size:24px;
+  border:2px solid grey;
+  border-radius:5px;
+  margin-top:50px;
+  background:#333333;
+}
+.homepage .start:hover {
+  background:#555555;
+  cursor:pointer;
+}
+.homepage .start:active {
+  background:#999999;
+}
+.arrow.right {
+  transform:rotate(90deg);
+}
+.arrow.down {
+  transform:rotate(180deg);
+}
+.arrow.left {
+  transform:rotate(-90deg);
+}
 #snake {
-  width:100%;
-  height:100%;
   position:absolute;
   left:0;
   top:0;

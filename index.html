@@ -4,14 +4,51 @@
 <link href="SnakeGame.css" rel="stylesheet">
 </head>
 <body>
-
+<main>
+</main>
+<div class="templates">
+<section class="homepageLayout">
+  <h1>Snake</h1>
+  <article class="rules">
+  <h2>Rules</h2>
+  <p>You are the snake!<br /><br />Direct yourself toward the apples (large white dots). As you eat apples, you grow longer. If you hit the edge of the window or yourself you die and the game starts over.<br /><br />See how long you can grow before you die!</p>
+  </article>
+  <article class="controls"><!--
+    --><h2>Controls</h2><!--
+    --><aside class="arrows"><!--
+    -->Move snake<!--
+    --></aside><!--
+    --><section class="arrows"><!--
+    --><img class="up arrow" src="assets/up_arrow.svg" alt="Up arrow" /><br /><!--
+    --><img class="left arrow" src="assets/up_arrow.svg" alt="Left arrow" /><!--
+    --><img class="down arrow" src="assets/up_arrow.svg" alt="Down arrow" /><!--
+    --><img class="right arrow" src="assets/up_arrow.svg" alt="Right arrow" /><!--
+    --></section><br /><br /><!--
+    --><aside class="spacebar"><!--
+    -->Play/Pause<!--
+    --></aside><!--
+    --><span class="spacebar">Spacebar</span><br /><br /><!--
+    --><aside class="escape"><!--
+    -->Return home<!--
+    --></aside><!--
+    --><span class="escape">Esc</span><!--
+  --></article><br />
+  <button class="start">Start</button>
+</section>
 <canvas id="snake"></canvas>
-
+</div>
 <script type='text/javascript'>
 (function() {
    var script = document.createElement('script');
    script.setAttribute('src', 'SnakeGame.js');
    script.setAttribute('type', 'text/javascript');
+   script.setAttribute('async', 'true');
+   document.getElementsByTagName('head')[0].appendChild(script);
+
+   script = document.createElement('script');
+   script.setAttribute('src', 'SnakeGameHomepage.js');
+   script.setAttribute('type', 'text/javascript');
+   script.setAttribute('async', 'true');
    document.getElementsByTagName('head')[0].appendChild(script);
 }());
 </script>

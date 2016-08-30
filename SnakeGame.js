@@ -187,7 +187,13 @@
       }
     };
 
-    function initializeGame() {
+    function initialize() {
+      if (!document.querySelector("main").classList.contains("game")) {
+        document.querySelector("main").classList.add("game");
+        document.querySelector("main").appendChild(
+          document.querySelector(".templates #snake")
+        );
+      }
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       start = {
@@ -223,7 +229,7 @@
       return Math.abs(loc2.x - loc1.x) + Math.abs(loc2.y - loc1.y);
     }
 
-    function togglePlayPause () {
+    function togglePlayPause() {
       if (gameIsOn) {
         window.clearInterval(gameOn);
         gameIsOn = false;
@@ -233,12 +239,24 @@
       }
     }
 
+    function exitGame() {
+      gameIsOn = false;
+      window.clearInterval(gameOn);
+      window.removeEventListener("keydown", catchUserEvents);
+      document.querySelector("main").classList.remove("game");
+      document.querySelector(".templates").appendChild(
+        document.querySelector("#snake")
+      );
+      window.SnakeGame.homepage.initialize();
+    }
+
+
     function endGame() {
       gameIsOn = false;
       window.clearInterval(gameOn);
       window.removeEventListener("keydown", catchUserEvents);
       alert("Game over");
-      initializeGame();
+      initialize();
     }
 
     /*
@@ -265,6 +283,8 @@
       // Spacebar pauses game
       } else if (e.keyCode === 32 || e.which === 32) {
         togglePlayPause();
+      } else if (e.keyCode === 27 || e.which === 27) {
+        exitGame();
       }
     }
 
@@ -309,8 +329,14 @@
     }
 
     return {
-      "initializeGame" : initializeGame
+      "initialize" : initialize
     }
   }
-  SnakeGame().initializeGame();
+  if (window.SnakeGame === undefined) {
+    window.SnakeGame = {
+      "player" : SnakeGame()
+    };
+  } else {
+    window.SnakeGame.player = SnakeGame();
+  }
 }());
