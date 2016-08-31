@@ -58,7 +58,6 @@
           snakeHead.y >= (apple.y - apple.radius) &&
           snakeHead.y <= (apple.y + apple.radius)
         ) {
-          this.allowedLength += moveDistancePerFrame;
           apple.resetLocation();
           return true;
         }
@@ -81,8 +80,8 @@
         }
       },
       /**
-       * Called when total snake length is one frame
-       * greater than snake.allowedLength
+       * Called each time snake moves if it does not
+       * eat an apple.
        */
       "shrink" : function() {
         if (getDistance(this.tail, this.body[0]) > moveDistancePerFrame) {
@@ -187,13 +186,21 @@
       }
     };
 
-    function initialize() {
+    function initialize(input) {
       if (!document.querySelector("main").classList.contains("game")) {
         document.querySelector("main").classList.add("game");
         document.querySelector("main").appendChild(
           document.querySelector(".templates #snake")
         );
       }
+      moveDistancePerFrame =
+        input === undefined || input.moveDistancePerFrame === undefined
+        ?
+        5 : input.moveDistancePerFrame; //CONST
+      timePerFrame =
+        input === undefined || input.timePerFrame === undefined
+        ?
+        50 : input.timePerFrame; //CONST
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       start = {
@@ -205,7 +212,6 @@
       apple.resetLocation();
 
       snake.direction = "right";
-      snake.allowedLength = moveDistancePerFrame;
       snake.body = [{
         "direction" : "right",
         "x" : start.x + moveDistancePerFrame,
@@ -240,9 +246,7 @@
     }
 
     function exitGame() {
-      gameIsOn = false;
-      window.clearInterval(gameOn);
-      window.removeEventListener("keydown", catchUserEvents);
+      endGame();
       document.querySelector("main").classList.remove("game");
       document.querySelector(".templates").appendChild(
         document.querySelector("#snake")
@@ -255,6 +259,10 @@
       gameIsOn = false;
       window.clearInterval(gameOn);
       window.removeEventListener("keydown", catchUserEvents);
+    }
+
+    function killSnake() {
+      endGame();
       alert("Game over");
       initialize();
     }
@@ -291,8 +299,8 @@
     function runGameFrame(e) {
       var ateApple = false;
       /*
-        Moving the snake extends it one frame length
-        further than snake.allowedLength
+       * Moving the snake grows it, whether or not it
+       * has eaten an apple.
       */
       if (snake.direction === "up") {
         snake.move("up", 0, -moveDistancePerFrame);
