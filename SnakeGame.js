@@ -332,7 +332,7 @@
 
       // If snake crashes into itself or end of board
       if (snake.hasCrashed()) {
-        endGame();
+        killSnake();
       }
     }
 
