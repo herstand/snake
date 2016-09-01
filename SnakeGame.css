@@ -88,6 +88,52 @@ body {
   font-size:16px;
   margin-bottom:15px;
 }
+.homepage .difficulty .setting {
+  display:inline-block;
+  width:302px;
+  height:42px;
+  border:1px solid grey;
+  border-radius:5px;
+  padding:0;
+  margin:0;
+  position:relative;
+}
+.homepage .difficulty .setting input {
+  display:none;
+}
+.homepage .difficulty .setting .level {
+  display:inline-block;
+  width:100px;
+  height:20px;
+  margin:0;
+  padding:10px 0;
+  border:0;
+}
+.homepage .difficulty .setting .level:hover {
+  cursor:pointer;
+}
+.homepage .difficulty .setting .selector {
+  display:inline-block;
+  position:absolute;
+  width:90px;
+  height:30px;
+  border-radius:5px;
+  background:grey;
+  transition:left 1s;
+  left:5px;
+  top:5px;
+  content:"";
+  z-index:-1;
+}
+.homepage .difficulty .setting #easy:checked ~ .selector {
+  left:5px;
+}
+.homepage .difficulty .setting #medium:checked ~ .selector {
+  left:105px;
+}
+.homepage .difficulty .setting #hard:checked ~ .selector {
+  left:205px;
+}
 .homepage .start {
   background:black;
   color:white;

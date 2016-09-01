@@ -3,8 +3,7 @@
    * The magic happens in runGameFrame()
   */
   function SnakeGame() {
-    var moveDistancePerFrame = 5; //CONST
-    var timePerFrame = 50; //CONST
+    var timePerFrame = 0;
     var gameOn = undefined;
     var gameIsOn = false;
     var canvas = document.getElementById("snake");
@@ -70,13 +69,13 @@
       },
       "shrinkTail" : function() {
         if (this.body[0].direction === "up") {
-          this.tail.y -= moveDistancePerFrame;
+          this.tail.y -= 1;
         } else if (this.body[0].direction === "right") {
-          this.tail.x += moveDistancePerFrame;
+          this.tail.x += 1;
         } else if (this.body[0].direction === "down") {
-          this.tail.y += moveDistancePerFrame;
+          this.tail.y += 1;
         } else { //Left
-          this.tail.x -= moveDistancePerFrame;
+          this.tail.x -= 1;
         }
       },
       /**
@@ -84,15 +83,32 @@
        * eat an apple.
        */
       "shrink" : function() {
-        if (getDistance(this.tail, this.body[0]) > moveDistancePerFrame) {
+        if (getDistance(this.tail, this.body[0]) > 1) {
           this.shrinkTail();
         } else {
           this.chopTailEnd();
         }
       },
       /**
+       * After eating an apple, grow this.growLength - 1
+       * Moving the snake grows it one pixel, so we don't need to grow the
+       * full growLength.
+       */
+      "grow" : function() {
+        var head = this.body[this.body.length - 1];
+        if (head.direction === "up") {
+          head.y -= (this.growLength - 1);
+        } else if (head.direction === "right") {
+          head.x += (this.growLength - 1);
+        } else if (head.direction === "down") {
+          head.y += (this.growLength - 1);
+        } else { //Left
+          head.x -= (this.growLength - 1);
+        }
+      },
+      /**
        *  @param direction, e.g. "up", "right", "down", "left"
-       *  @param x, e.g. -moveDistancePerFrame
+       *  @param x, e.g. -1
        *  @param y, e.g. 0
        */
       "move" : function(direction, x, y) {
@@ -132,18 +148,14 @@
             // Crashed into a horizontal segment of itself
             if (
               (
-                (head.y > snakeTo.y - moveDistancePerFrame)
-                &&
-                (head.y < snakeTo.y + moveDistancePerFrame)
+                (head.y === snakeTo.y)
                 &&
                 (head.x < snakeTo.x && head.x > snakeFrom.x)
               )
               ||
               // Crashed into a vertical segment of itself
               (
-                (head.x > snakeTo.x - moveDistancePerFrame)
-                &&
-                (head.x < snakeTo.x + moveDistancePerFrame)
+                (head.x === snakeTo.x)
                 &&
                 (head.y < snakeTo.y && head.y > snakeFrom.y)
               )
@@ -193,14 +205,11 @@
           document.querySelector(".templates #snake")
         );
       }
-      moveDistancePerFrame =
-        input === undefined || input.moveDistancePerFrame === undefined
-        ?
-        5 : input.moveDistancePerFrame; //CONST
+      snake.growLength = 5;
       timePerFrame =
         input === undefined || input.timePerFrame === undefined
         ?
-        50 : input.timePerFrame; //CONST
+        10 : input.timePerFrame;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       start = {
@@ -214,7 +223,7 @@
       snake.direction = "right";
       snake.body = [{
         "direction" : "right",
-        "x" : start.x + moveDistancePerFrame,
+        "x" : start.x + 50,
         "y" : start.y
       }];
       snake.tail = {
@@ -264,7 +273,7 @@
     function killSnake() {
       endGame();
       alert("Game over");
-      initialize();
+      initialize({"timePerFrame" : timePerFrame});
     }
 
     /*
@@ -303,13 +312,13 @@
        * has eaten an apple.
       */
       if (snake.direction === "up") {
-        snake.move("up", 0, -moveDistancePerFrame);
+        snake.move("up", 0, -1);
       } else if (snake.direction === "right") {
-        snake.move("right", moveDistancePerFrame, 0);
+        snake.move("right", 1, 0);
       } else if (snake.direction === "down") {
-        snake.move("down", 0, moveDistancePerFrame);
+        snake.move("down", 0, 1);
       } else { // "left"
-        snake.move("left", -moveDistancePerFrame, 0);
+        snake.move("left", -1, 0);
       }
 
       ateApple = snake.tryToEat(apple);
@@ -323,6 +332,12 @@
           one frame length, given the move.
         */
         snake.shrink();
+      } else {
+        /*
+         If they ate an apple, they have to grow
+         snake.growLength - 1
+        */
+        snake.grow();
       }
       /*
         Draw snake given new coordinates, and apple

@@ -31,10 +31,18 @@
     }
 
     function startGame() {
+      var difficultySpeed =
+        document.querySelector(
+          ".homepage .difficulty .setting input:checked"
+        ).value;
       window.removeEventListener("keydown", catchUserEvents);
       document.querySelector(".homepage .start").removeEventListener("click", startGame);
       hideHomepage();
-      window.SnakeGame.player.initialize();
+      window.SnakeGame.player.initialize(
+        {
+          "timePerFrame" : difficultySpeed
+        }
+      );
     }
 
     return {
