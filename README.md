@@ -14,5 +14,5 @@
 ## TODO
 - Add a high score (number of apples eaten)
 - Make the thickness of the snake a user-defined feature
-- Add accelerometer events and/or touch-screen buttons for phones/tablets
+- Add accelerometer events and/or touch-screen buttons for phones/tablets.
 - Have game always run at 60fps (currently depends on difficulty, with max of 100fps) and use requestAnimationFrame instead of setInterval
